@@ -1,0 +1,15 @@
+<th:block th:replace="~{fragments/shell :: shell(~{::content}, ${bodyClass}, false)}">
+<th:block th:fragment="content" th:inline="text">
+<h1 class="page-title">Categories</h1>
+<p style="color:var(--muted);margin-top:-.5rem;margin-bottom:1.2rem;">Browse by mood, subject, or shelf — nine curated corners of the store.</p>
+<div class="category-grid category-grid-large">
+    <th:block th:each="cat : ${categories}">
+        <a class="category-tile" th:href="${contextPath + '/categories/detail' + '?id=' + cat.id}">
+            <img th:src="${contextPath + assets.assetUrl(cat.imageKey)}" th:alt="${assets.assetAlt(cat.imageKey)}" loading="lazy"/>
+            <span><span th:text="${cat.name}"></span></span>
+            <p><span th:text="${cat.description}"></span></p>
+        </a>
+    </th:block>
+</div>
+</th:block>
+</th:block>

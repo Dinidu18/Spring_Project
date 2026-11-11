@@ -1,0 +1,11 @@
+<th:block th:replace="~{fragments/shell :: shell(~{::content}, ${bodyClass}, false)}">
+<th:block th:fragment="content" th:inline="text">
+<h1>Delete book</h1>
+<p>Delete “<span th:text="${book.title}"></span>”? Remove reviews first.</p>
+<form method="post" th:action="${contextPath + '/admin/books/delete'}" data-busy-guard>
+    <input type="hidden" name="_csrf" th:value="${csrfToken}"/>
+    <input type="hidden" name="id" th:value="${book.id}"/>
+    <button type="submit" class="button button-danger">Delete</button>
+</form>
+</th:block>
+</th:block>

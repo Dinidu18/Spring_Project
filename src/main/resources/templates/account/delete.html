@@ -1,0 +1,10 @@
+<th:block th:replace="~{fragments/shell :: shell(~{::content}, ${bodyClass}, false)}">
+<th:block th:fragment="content" th:inline="text">
+<h1>Delete account</h1>
+<p>This permanently removes your profile. Delete any reviews first.</p>
+<form method="post" th:action="${contextPath + '/account/delete'}" class="form-stack narrow" data-busy-guard>
+    <input type="hidden" name="_csrf" th:value="${csrfToken}"/>
+    <button type="submit" class="button button-danger">Yes, delete my account</button>
+</form>
+</th:block>
+</th:block>

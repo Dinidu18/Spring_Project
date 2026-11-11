@@ -1,0 +1,24 @@
+<th:block th:replace="~{fragments/shell :: shell(~{::content}, ${bodyClass}, false)}">
+<th:block th:fragment="content" th:inline="text">
+<h1>Reviews</h1>
+<table class="data-table">
+    <thead><tr><th>Title</th><th>Rating</th><th>Book</th><th></th></tr></thead>
+    <tbody>
+    <th:block th:each="review : ${reviews}">
+        <tr>
+            <td><span th:text="${review.title}"></span></td>
+            <td>[[${review.rating}]]</td>
+            <td>[[${review.bookId}]]</td>
+            <td>
+                <form method="post" th:action="${contextPath + '/admin/reviews/delete'}" class="inline-form">
+                    <input type="hidden" name="_csrf" th:value="${csrfToken}"/>
+                    <input type="hidden" name="id" th:value="${review.id}"/>
+                    <button type="submit" class="link-button">Remove</button>
+                </form>
+            </td>
+        </tr>
+    </th:block>
+    </tbody>
+</table>
+</th:block>
+</th:block>

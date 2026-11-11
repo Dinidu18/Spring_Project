@@ -1,0 +1,13 @@
+<th:block th:replace="~{fragments/shell :: shell(~{::content}, ${bodyClass}, false)}">
+<th:block th:fragment="content" th:inline="text">
+<h1><span th:text="${review.title}"></span></h1>
+<p class="meta">[[${authorName}]] · [[${review.rating}]]★ · <a th:href="${contextPath + '/books/detail' + '?id=' + book.id}"><span th:text="${book.title}"></span></a></p>
+<p><span th:text="${review.body}"></span></p>
+<th:block th:if="${!(currentUser == null) and currentUser.id == review.authorId}">
+    <div class="action-row">
+        <a class="button button-secondary" th:href="${contextPath + '/reviews/edit' + '?id=' + review.id}">Edit</a>
+        <a class="button button-danger" th:href="${contextPath + '/reviews/delete' + '?id=' + review.id}">Delete</a>
+    </div>
+</th:block>
+</th:block>
+</th:block>

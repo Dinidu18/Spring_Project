@@ -1,0 +1,44 @@
+<th:block th:replace="~{fragments/shell :: shell(~{::content}, ${bodyClass}, false)}">
+<th:block th:fragment="content" th:inline="text">
+<div class="section-head">
+    <h1 class="page-title">Browse books</h1>
+    <a class="button button-secondary" th:href="${contextPath + '/books/available.pdf'}">Download available books (PDF)</a>
+</div>
+<form class="filter-bar" method="get" th:action="${contextPath + '/books'}">
+    <label>Search
+        <input type="search" name="q" th:value="${query.searchText}" placeholder="Title or author"/>
+    </label>
+    <label>Category
+        <select name="categoryId">
+            <option value="">All categories</option>
+            <th:block th:each="cat : ${categories}">
+                <option th:value="${cat.id}" th:selected="${cat.id == query.categoryId}"><span th:text="${cat.name}"></span></option>
+            </th:block>
+        </select>
+    </label>
+    <label>Format
+        <select name="type">
+            <option value="">All formats</option>
+            <option value="PRINTED" th:selected="${query.bookType == 'PRINTED'}">Printed</option>
+            <option value="EBOOK" th:selected="${query.bookType == 'EBOOK'}">E-book</option>
+        </select>
+    </label>
+    <label class="filter-check"><input type="checkbox" name="featured" value="1" th:checked="${query.featuredOnly}"/> Featured only</label>
+    <button type="submit" class="button">Apply</button>
+</form>
+
+<p class="result-count">[[${catalog.totalItems}]] title(s)</p>
+<div class="card-grid">
+    <th:block th:each="book : ${catalog.items}">
+        <article class="book-card">
+            <a th:href="${contextPath + '/books/detail' + '?id=' + book.id}">
+                <img th:src="${contextPath + assets.assetUrl(book.coverImageKey)}" th:alt="${assets.assetAlt(book.coverImageKey)}" loading="lazy"/>
+                <h3><span th:text="${book.title}"></span></h3>
+                <p class="meta"><span th:text="${book.author}"></span> · [[${book.typeCode}]]</p>
+                <p class="price"><span th:text="${'Rs. ' + #numbers.formatDecimal(book.price, 1, 'COMMA', 2, 'POINT')}"></span></p>
+            </a>
+        </article>
+    </th:block>
+</div>
+</th:block>
+</th:block>

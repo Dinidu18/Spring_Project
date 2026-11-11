@@ -1,0 +1,18 @@
+<th:block th:replace="~{fragments/shell :: shell(~{::content}, ${bodyClass}, false)}">
+<th:block th:fragment="content" th:inline="text">
+<h1>Contact messages</h1>
+<table class="data-table">
+    <thead><tr><th>When</th><th>From</th><th>Subject</th><th></th></tr></thead>
+    <tbody>
+    <th:block th:each="msg : ${messages}">
+        <tr>
+            <td><span th:text="${#dates.format(msg.createdAtDate, 'dd MMM yyyy hh:mm a')}"></span></td>
+            <td><span th:text="${msg.name}"></span></td>
+            <td><span th:text="${msg.subject}"></span></td>
+            <td><a th:href="${contextPath + '/admin/contact/detail' + '?id=' + msg.id}">Open</a></td>
+        </tr>
+    </th:block>
+    </tbody>
+</table>
+</th:block>
+</th:block>

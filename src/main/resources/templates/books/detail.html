@@ -1,0 +1,50 @@
+<th:block th:replace="~{fragments/shell :: shell(~{::content}, ${bodyClass}, false)}">
+<th:block th:fragment="content" th:inline="text">
+<article class="book-detail">
+    <div class="book-detail-cover">
+        <img th:src="${contextPath + assets.assetUrl(book.coverImageKey)}" th:alt="${assets.assetAlt(book.coverImageKey)}"/>
+    </div>
+    <div class="book-detail-body">
+        <p class="eyebrow"><span th:text="${category.name}"></span> · [[${book.typeCode}]]</p>
+        <h1><span th:text="${book.title}"></span></h1>
+        <p class="meta">by <span th:text="${book.author}"></span> · [[${book.publicationYear}]]</p>
+        <p class="price"><span th:text="${'Rs. ' + #numbers.formatDecimal(book.price, 1, 'COMMA', 2, 'POINT')}"></span></p>
+        <p><span th:text="${book.description}"></span></p>
+        <p><strong>Format:</strong> <span th:text="${book.formatDetails}"></span></p>
+        <th:block th:if="${!(averageRating == null)}">
+            <p class="rating-summary">Average rating: <span th:text="${#numbers.formatDecimal(averageRating, 1, 'COMMA', 1, 'POINT')}"></span> / 5</p>
+        </th:block>
+        <div class="action-row">
+            <th:block th:if="${!(currentUser == null)}">
+                <form method="post" th:action="${contextPath + '/wishlist/add'}" class="inline-form">
+                    <input type="hidden" name="_csrf" th:value="${csrfToken}"/>
+                    <input type="hidden" name="bookId" th:value="${book.id}"/>
+                    <button type="submit" class="button">Add to wishlist</button>
+                </form>
+                <a class="button button-secondary" th:href="${contextPath + '/reviews/new' + '?bookId=' + book.id}">Write review</a>
+            </th:block>
+        </div>
+    </div>
+</article>
+
+<section class="section">
+    <h2>Reader reviews</h2>
+    <th:block>
+        <th:block th:if="${#lists.isEmpty(reviews)}">
+            <p>No reviews yet — be the first to share your thoughts.</p>
+        </th:block>
+        <th:block th:unless="${#lists.isEmpty(reviews)}">
+            <div class="review-list">
+                <th:block th:each="review : ${reviews}">
+                    <article class="review-card">
+                        <h3><a th:href="${contextPath + '/reviews/detail' + '?id=' + review.id}"><span th:text="${review.title}"></span></a></h3>
+                        <p class="meta">[[${authorNames[review.authorId]}]] · [[${review.rating}]]★</p>
+                        <p><span th:text="${review.body}"></span></p>
+                    </article>
+                </th:block>
+            </div>
+        </th:block>
+    </th:block>
+</section>
+</th:block>
+</th:block>

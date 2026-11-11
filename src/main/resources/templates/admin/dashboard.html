@@ -1,0 +1,22 @@
+<th:block th:replace="~{fragments/shell :: shell(~{::content}, ${bodyClass}, false)}">
+<th:block th:fragment="content" th:inline="text">
+<h1 class="page-title">Admin dashboard</h1>
+<div class="stat-grid">
+    <a class="stat-card" th:href="${contextPath + '/admin/books'}"><strong>[[${bookCount}]]</strong><span>Books</span></a>
+    <a class="stat-card" th:href="${contextPath + '/admin/categories'}"><strong>[[${categoryCount}]]</strong><span>Categories</span></a>
+    <a class="stat-card" th:href="${contextPath + '/admin/reviews'}"><strong>[[${reviewCount}]]</strong><span>Reviews</span></a>
+    <a class="stat-card" th:href="${contextPath + '/admin/contact'}"><strong>[[${messageCount}]]</strong><span>Messages</span></a>
+</div>
+
+<section class="section">
+    <div class="section-head"><h2>Quick actions</h2></div>
+    <div class="action-row">
+        <a class="button" th:href="${contextPath + '/admin/books/new'}">Add book</a>
+        <a class="button button-secondary" th:href="${contextPath + '/admin/books'}">Manage books</a>
+        <a class="button" th:href="${contextPath + '/admin/categories/new'}">Add category</a>
+        <a class="button button-secondary" th:href="${contextPath + '/admin/categories'}">Manage categories</a>
+        <a class="button button-secondary" th:href="${contextPath + '/admin/reviews'}">Moderate reviews</a>
+    </div>
+</section>
+</th:block>
+</th:block>

@@ -1,0 +1,20 @@
+<th:block th:replace="~{fragments/shell :: shell(~{::content}, ${bodyClass}, false)}">
+<th:block th:fragment="content" th:inline="text">
+<div class="section-head"><h1>Categories</h1><a class="button" th:href="${contextPath + '/admin/categories/new'}">New category</a></div>
+<table class="data-table">
+    <thead><tr><th>Name</th><th></th></tr></thead>
+    <tbody>
+    <th:block th:each="cat : ${categories}">
+        <tr>
+            <td><span th:text="${cat.name}"></span></td>
+            <td>
+                <a th:href="${contextPath + '/admin/categories/edit' + '?id=' + cat.id}">Edit</a>
+                ·
+                <a th:href="${contextPath + '/admin/categories/delete' + '?id=' + cat.id}">Delete</a>
+            </td>
+        </tr>
+    </th:block>
+    </tbody>
+</table>
+</th:block>
+</th:block>

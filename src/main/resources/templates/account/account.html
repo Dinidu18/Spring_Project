@@ -1,0 +1,17 @@
+<th:block th:replace="~{fragments/shell :: shell(~{::content}, ${bodyClass}, false)}">
+<th:block th:fragment="content" th:inline="text">
+<h1>My account</h1>
+<dl class="detail-list">
+    <dt>Name</dt><dd><span th:text="${account.displayName}"></span></dd>
+    <dt>Email</dt><dd><span th:text="${account.email}"></span></dd>
+    <dt>Phone</dt><dd><span th:text="${(account.phone == null or #strings.isEmpty(account.phone)) ? '—' : account.phone}"></span></dd>
+    <dt>Role</dt><dd><span th:text="${account.role}"></span></dd>
+    <dt>Member since</dt><dd><span th:text="${#dates.format(account.createdAtDate, 'dd MMM yyyy')}"></span></dd>
+</dl>
+<div class="action-row">
+    <a class="button button-secondary" th:href="${contextPath + '/account/edit'}">Edit profile</a>
+    <a class="button button-secondary" th:href="${contextPath + '/account/password'}">Change password</a>
+    <a class="button button-danger" th:href="${contextPath + '/account/delete'}">Delete account</a>
+</div>
+</th:block>
+</th:block>

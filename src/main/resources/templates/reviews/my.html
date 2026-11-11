@@ -1,0 +1,29 @@
+<th:block th:replace="~{fragments/shell :: shell(~{::content}, ${bodyClass}, false)}">
+<th:block th:fragment="content" th:inline="text">
+<h1>My reviews</h1>
+<th:block>
+    <th:block th:if="${#lists.isEmpty(reviews)}">
+        <p>You have not written any reviews yet.</p>
+    </th:block>
+    <th:block th:unless="${#lists.isEmpty(reviews)}">
+        <table class="data-table">
+            <thead><tr><th>Book</th><th>Title</th><th>Rating</th><th></th></tr></thead>
+            <tbody>
+            <th:block th:each="review : ${reviews}">
+                <tr>
+                    <td><span th:text="${booksById[review.bookId].title}"></span></td>
+                    <td><a th:href="${contextPath + '/reviews/detail' + '?id=' + review.id}"><span th:text="${review.title}"></span></a></td>
+                    <td>[[${review.rating}]]</td>
+                    <td>
+                        <a th:href="${contextPath + '/reviews/edit' + '?id=' + review.id}">Edit</a>
+                        ·
+                        <a th:href="${contextPath + '/reviews/delete' + '?id=' + review.id}">Delete</a>
+                    </td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </th:block>
+</th:block>
+</th:block>
+</th:block>

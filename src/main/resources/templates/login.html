@@ -1,0 +1,22 @@
+<th:block th:replace="~{fragments/shell :: shell(~{::content}, ${bodyClass}, false)}" th:with="bodyClass='auth-page'">
+<th:block th:fragment="content" th:inline="text">
+<div class="auth-shell">
+    <aside class="auth-visual">
+        <h2>Welcome back to your reading room</h2>
+        <p>Pick up where you left off — wishlists, reviews, and a quieter corner of the catalog.</p>
+    </aside>
+    <div class="auth-panel">
+        <h1>Sign in</h1>
+        <p class="lede">Use your Chapter House member email and password.</p>
+        <form method="post" th:action="${contextPath + '/login'}" class="form-stack" data-busy-guard>
+            <input type="hidden" name="_csrf" th:value="${csrfToken}"/>
+            <input type="hidden" name="return" th:value="${returnPath}"/>
+            <label>Email<input type="email" name="email" required autocomplete="username" placeholder="you@example.com"/></label>
+            <label>Password<input type="password" name="password" required autocomplete="current-password" placeholder="••••••••"/></label>
+            <button type="submit" class="button">Sign in</button>
+        </form>
+        <p class="auth-foot">New here? <a th:href="${contextPath + '/register'}">Create an account</a></p>
+    </div>
+</div>
+</th:block>
+</th:block>

@@ -1,0 +1,6 @@
+<nav xmlns:th="http://www.thymeleaf.org" class="pagination" aria-label="Pagination"
+     th:fragment="pagination" th:if="${catalog != null and catalog.totalPages > 1}">
+    <a th:if="${catalog.page > 1}" th:href="${contextPath + '?page=' + (catalog.page - 1)}">Previous</a>
+    <span>Page <span th:text="${catalog.page}"></span> of <span th:text="${catalog.totalPages}"></span></span>
+    <a th:if="${catalog.page < catalog.totalPages}" th:href="${contextPath + '?page=' + (catalog.page + 1)}">Next</a>
+</nav>

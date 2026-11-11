@@ -1,0 +1,11 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="640" height="400" viewBox="0 0 640 400" role="img" aria-label="Business">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#344e41"/>
+      <stop offset="100%" stop-color="#a3b18a"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="400" fill="url(#g)"/>
+  <circle cx="520" cy="80" r="90" fill="rgba(255,255,255,.12)"/>
+  <text x="36" y="220" fill="#fff" font-family="Georgia, serif" font-size="42" font-weight="700">Business</text>
+</svg>

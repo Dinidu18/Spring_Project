@@ -1,0 +1,25 @@
+<th:block th:replace="~{fragments/shell :: shell(~{::content}, ${bodyClass}, false)}">
+<th:block th:fragment="content" th:inline="text">
+<h1>My wishlist</h1>
+<th:block>
+    <th:block th:if="${#lists.isEmpty(wishlistBooks)}">
+        <p>Your wishlist is empty. <a th:href="${contextPath + '/books'}">Browse books</a>.</p>
+    </th:block>
+    <th:block th:unless="${#lists.isEmpty(wishlistBooks)}">
+        <div class="card-grid">
+            <th:block th:each="book : ${wishlistBooks}">
+                <article class="book-card">
+                    <img th:src="${contextPath + assets.assetUrl(book.coverImageKey)}" th:alt="${assets.assetAlt(book.coverImageKey)}"/>
+                    <h3><a th:href="${contextPath + '/books/detail' + '?id=' + book.id}"><span th:text="${book.title}"></span></a></h3>
+                    <form method="post" th:action="${contextPath + '/wishlist/remove'}">
+                        <input type="hidden" name="_csrf" th:value="${csrfToken}"/>
+                        <input type="hidden" name="bookId" th:value="${book.id}"/>
+                        <button type="submit" class="link-button">Remove</button>
+                    </form>
+                </article>
+            </th:block>
+        </div>
+    </th:block>
+</th:block>
+</th:block>
+</th:block>

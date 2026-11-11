@@ -1,0 +1,61 @@
+<th:block th:replace="~{fragments/shell :: shell(~{::content}, ${bodyClass}, false)}" th:with="bodyClass=${null}, printed=${book != null and book.typeCode == 'PRINTED' ? book : null}, ebook=${book != null and book.typeCode == 'EBOOK' ? book : null}">
+<th:block th:fragment="content" th:inline="text">
+<h1><span th:text="${pageTitle}"></span></h1>
+<form method="post" th:action="${contextPath + '/admin/books/save'}" class="form-stack" data-busy-guard>
+    <input type="hidden" name="_csrf" th:value="${csrfToken}"/>
+    <th:block th:if="${!(book == null)}"><input type="hidden" name="id" th:value="${book.id}"/></th:block>
+    <label>Type
+        <select name="bookType">
+            <option value="PRINTED" th:selected="${book == null or book.typeCode == 'PRINTED'}">Printed</option>
+            <option value="EBOOK" th:selected="${book != null and book.typeCode == 'EBOOK'}">E-book</option>
+        </select>
+    </label>
+    <label>Title<input name="title" required th:value="${book != null ? book.title : ''}"/></label>
+    <label>Author<input name="author" required th:value="${book != null ? book.author : ''}"/></label>
+    <label>Description<textarea name="description" required minlength="30">[[${book != null ? book.description : ''}]]</textarea></label>
+    <label>ISBN<input name="isbn" th:value="${book != null ? book.isbn : ''}"/></label>
+    <label>Year<input type="number" name="publicationYear" th:value="${book == null ? 2024 : book.publicationYear}"/></label>
+    <label>Category
+        <select name="categoryId" required>
+            <th:block th:each="cat : ${categories}">
+                <option th:value="${cat.id}" th:selected="${book != null and book.categoryId == cat.id}"><span th:text="${cat.name}"></span></option>
+            </th:block>
+        </select>
+    </label>
+    <label>Price<input name="price" required th:value="${book == null ? '19.99' : book.price}"/></label>
+    <label>Cover key
+        <select name="coverImageKey" required>
+            <th:block th:each="key : ${coverKeys}">
+                <option th:value="${key}" th:selected="${book != null and book.coverImageKey == key}">[[${key}]]</option>
+            </th:block>
+        </select>
+    </label>
+    <label><input type="checkbox" name="featured" th:checked="${book != null and book.featured}"/> Featured</label>
+    <fieldset>
+        <legend>Printed fields</legend>
+        
+        <label>Stock<input type="number" name="stockQuantity" th:value="${printed == null ? 10 : printed.stockQuantity}"/></label>
+        <label>Pages<input type="number" name="pageCount" th:value="${printed == null ? 300 : printed.pageCount}"/></label>
+        <label>Binding
+            <select name="binding">
+                <option value="PAPERBACK" th:selected="${printed == null or printed.binding == 'PAPERBACK'}">Paperback</option>
+                <option value="HARDCOVER" th:selected="${printed != null and printed.binding == 'HARDCOVER'}">Hardcover</option>
+            </select>
+        </label>
+    </fieldset>
+    <fieldset>
+        <legend>E-book fields</legend>
+        
+        <label>Format
+            <select name="fileFormat">
+                <option value="PDF" th:selected="${ebook == null or ebook.fileFormat == 'PDF'}">PDF</option>
+                <option value="EPUB" th:selected="${ebook != null and ebook.fileFormat == 'EPUB'}">EPUB</option>
+            </select>
+        </label>
+        <label>Size (MB)<input name="fileSizeMb" th:value="${ebook == null ? '2.5' : ebook.fileSizeMb}"/></label>
+        <label><input type="checkbox" name="digitalAvailable" th:checked="${ebook == null or ebook.digitalAvailable}"/> Digital available</label>
+    </fieldset>
+    <button type="submit" class="button">Save book</button>
+</form>
+</th:block>
+</th:block>

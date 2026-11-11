@@ -1,0 +1,66 @@
+<th:block th:replace="~{fragments/shell :: shell(~{::content}, ${bodyClass}, true)}">
+<th:block th:fragment="content" th:inline="text">
+<section class="hero">
+    <div class="hero-inner">
+        <p class="eyebrow">Chapter House</p>
+        <h1>Stories that stay with you</h1>
+        <p class="lead">Printed editions and e-books, curated for curious readers — from quiet fiction to practical craft.</p>
+        <div class="hero-actions">
+            <a class="button" th:href="${contextPath + '/books'}">Browse Books</a>
+            <a class="button button-secondary" th:href="${contextPath + '/categories'}">Explore Categories</a>
+            <a class="button button-secondary" th:href="${contextPath + '/books/available.pdf'}">Download available PDF</a>
+        </div>
+    </div>
+</section>
+<div class="container">
+
+<section class="section">
+    <div class="section-head">
+        <h2>Featured picks</h2>
+        <a th:href="${contextPath + '/books' + '?featured=' + '1'}">View all</a>
+    </div>
+    <div class="card-grid">
+        <th:block th:each="book : ${featuredBooks}">
+            <article class="book-card">
+                <a th:href="${contextPath + '/books/detail' + '?id=' + book.id}">
+                    <img th:src="${contextPath + assets.assetUrl(book.coverImageKey)}" th:alt="${assets.assetAlt(book.coverImageKey)}" loading="lazy"/>
+                    <h3><span th:text="${book.title}"></span></h3>
+                    <p class="meta"><span th:text="${book.author}"></span></p>
+                    <p class="price"><span th:text="${'Rs. ' + #numbers.formatDecimal(book.price, 1, 'COMMA', 2, 'POINT')}"></span></p>
+                </a>
+            </article>
+        </th:block>
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-head"><h2>Shop by category</h2></div>
+    <div class="category-grid">
+        <th:block th:each="cat : ${categories}">
+            <a class="category-tile" th:href="${contextPath + '/categories/detail' + '?id=' + cat.id}">
+                <img th:src="${contextPath + assets.assetUrl(cat.imageKey)}" th:alt="${assets.assetAlt(cat.imageKey)}" loading="lazy"/>
+                <span><span th:text="${cat.name}"></span></span>
+            </a>
+        </th:block>
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-head">
+        <h2>New arrivals</h2>
+        <a th:href="${contextPath + '/books' + '?sort=' + 'CREATED' + '&dir=' + 'desc'}">See latest</a>
+    </div>
+    <div class="card-grid">
+        <th:block th:each="book : ${newArrivals}">
+            <article class="book-card">
+                <a th:href="${contextPath + '/books/detail' + '?id=' + book.id}">
+                    <img th:src="${contextPath + assets.assetUrl(book.coverImageKey)}" th:alt="${assets.assetAlt(book.coverImageKey)}" loading="lazy"/>
+                    <h3><span th:text="${book.title}"></span></h3>
+                    <p class="meta"><span th:text="${book.author}"></span> · [[${book.publicationYear}]]</p>
+                </a>
+            </article>
+        </th:block>
+    </div>
+</section>
+</th:block>
+</th:block>

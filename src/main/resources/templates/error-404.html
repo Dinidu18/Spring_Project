@@ -1,0 +1,7 @@
+<th:block th:replace="~{fragments/shell :: shell(~{::content}, ${bodyClass}, false)}">
+<th:block th:fragment="content" th:inline="text">
+<h1>Page not found</h1>
+<p>We could not find that chapter.</p>
+<p><a th:href="${contextPath + '/'}">Return home</a></p>
+</th:block>
+</th:block>

@@ -19,11 +19,11 @@ The existing data directory and text file formats are unchanged. The application
 2. `APP_DATA_DIR`
 3. `%USERPROFILE%\chapter-house-data`
 
-The files are `users.txt`, `books.txt`, `categories.txt`, `reviews.txt`, `wishlist.txt`, and `contact-messages.txt`. Do not delete or reformat these files when upgrading the application.
+The files are `users.txt`, `books.txt`, `categories.txt`, `reviews.txt`, `wishlist.txt`, and `contact-messages.txt`. 
 
 ## Administrator setup
 
-The application does not include hard-coded administrator credentials. To create an administrator, configure the JVM options
+To create an administrator, configure the JVM options
 `-Dchapterhouse.bootstrapAdminEmail=<email>` and `-Dchapterhouse.bootstrapAdminPassword=<password>` before starting it.
 If the data directory already has users but no administrator, these options create the configured administrator without
 replacing existing accounts. If the configured email is already registered, startup reports an error instead of changing
